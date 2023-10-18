@@ -30,16 +30,21 @@ export default function TestPage() {
         className="aspect-square w-full justify-self-center bg-slate-50 bg-[url('/background.svg')] bg-cover"
       >
         <motion.div
+          className=" shadow-2xl"
           ref={droneRef}
           style={{
             width: "10%",
             height: "10%",
-            backgroundColor: "red",
           }}
           animate={{
             x: droneX,
-            y: droneY,
+            y: [droneY, droneY - 5, droneY],
             rotate,
+          }}
+          transition={{
+            repeat: Infinity,
+            ease: "easeInOut",
+            duration: 2,
           }}
         >
           <Image priority src={drone} alt="drone" />
