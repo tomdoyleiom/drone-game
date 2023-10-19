@@ -13,6 +13,7 @@
   "dependencies": {
     "daisyui": "^3.9.2",
     "eslint-config-prettier": "^9.0.0",
+    "framer-motion": "^10.16.4",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18"
