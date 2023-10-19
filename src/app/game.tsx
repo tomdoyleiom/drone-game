@@ -1,7 +1,14 @@
 "use client";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  FormEvent,
+  FormEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Game, { GameDrone } from "@/game";
-import { Direction } from "..";
+import { Direction, Facing } from "..";
 
 export default function GameWrapper() {
   const game = useMemo(() => new Game(), []);
@@ -48,12 +55,12 @@ export default function GameWrapper() {
     );
   }, [game.grid, drone]);
 
-  const handlePlace = useCallback(() => {
-    const drone = game.place(0, 0, "NORTH");
-    if (drone) {
-      setDrone(() => ({ ...drone }));
-    }
-  }, [game]);
+  // const handlePlace = useCallback(() => {
+  //   const drone = game.place(0, 0, "NORTH");
+  //   if (drone) {
+  //     setDrone(() => ({ ...drone }));
+  //   }
+  // }, [game]);
 
   const handleRotate = useCallback(
     (direction: Direction) => () => {
@@ -83,6 +90,26 @@ export default function GameWrapper() {
     game.report();
   }, [game]);
 
+  const handleFormSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const data = new FormData(e.currentTarget);
+      const x = data.get("x")?.valueOf();
+      const y = data.get("y")?.valueOf();
+      const facing = data.get("facing")?.valueOf();
+      const drone = game.place(
+        parseInt(`${x}`),
+        parseInt(`${y}`),
+        facing?.toString() as Facing,
+      );
+
+      if (drone) {
+        setDrone(() => ({ ...drone }));
+      }
+    },
+    [game],
+  );
+
   useEffect(() => {
     if (drone?.attacking) {
       const timer = setTimeout(() => {
@@ -95,6 +122,7 @@ export default function GameWrapper() {
       return () => clearTimeout(timer);
     }
   }, [drone, game]);
+
   return (
     <div>
       <div className="mb-4">{grid}</div>
@@ -136,9 +164,53 @@ export default function GameWrapper() {
           attack
         </button>
 
-        <button onClick={handlePlace} className="btn btn-primary">
-          place
-        </button>
+        <form onSubmit={handleFormSubmit}>
+          <div className="form-control mt-4 max-w-xs">
+            <label className="label" htmlFor="x">
+              <span className=" label-text"> X coordinate</span>
+            </label>
+            <input
+              className="input join-item input-bordered"
+              name="x"
+              type="number"
+              min={0}
+              max={9}
+              defaultValue={0}
+            />
+          </div>
+          <div className="form-control max-w-xs">
+            <label className="label" htmlFor="y">
+              <span className=" label-text"> Y coordinate</span>
+            </label>
+            <input
+              className="input join-item input-bordered"
+              name="y"
+              type="numer"
+              min={0}
+              max={9}
+              defaultValue={0}
+            />
+          </div>
+          <div className="form-control mb-4 max-w-xs">
+            <label className="label" htmlFor="facing">
+              <span className=" label-text">Facing</span>
+            </label>
+            <select
+              className="select join-item select-bordered"
+              name="facing"
+              defaultValue={"NORTH"}
+            >
+              <option value="NORTH">North</option>
+              <option value="EAST">East</option>
+              <option value="SOUTH">South</option>
+              <option value="WEST">West</option>
+            </select>
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            place
+          </button>
+        </form>
       </div>
     </div>
   );
