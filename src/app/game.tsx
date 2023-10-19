@@ -3,7 +3,7 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Game, { GameDrone } from "@/game";
 import { Direction, Facing } from "..";
-
+import Map from "../components/map";
 export default function GameWrapper() {
   const game = useMemo(() => new Game(), []);
   const [drone, setDrone] = useState<GameDrone | undefined>();
@@ -11,7 +11,7 @@ export default function GameWrapper() {
   const grid = useMemo(() => {
     const droneLoc = drone?.coordinate;
     return (
-      <>
+      <div className="block">
         {game.grid.map((row, rowIndex) => (
           <div key={rowIndex} className="inline-block">
             {row.map((col) => (
@@ -45,7 +45,7 @@ export default function GameWrapper() {
             )}
           </div>
         )}
-      </>
+      </div>
     );
   }, [game.grid, drone]);
 
@@ -111,9 +111,10 @@ export default function GameWrapper() {
   }, [drone, game]);
 
   return (
-    <div>
-      <div className="mb-4">{grid}</div>
-      <div>
+    <div className="flex">
+      {/* <div className="mb-4">{grid}</div> */}
+      <Map drone={drone} />
+      <div className="mt-8 block pl-4">
         <button
           disabled={!drone}
           onClick={handleReport}
@@ -162,7 +163,6 @@ export default function GameWrapper() {
               type="number"
               min={0}
               max={9}
-              defaultValue={0}
             />
           </div>
           <div className="form-control max-w-xs">
@@ -175,7 +175,6 @@ export default function GameWrapper() {
               type="numer"
               min={0}
               max={9}
-              defaultValue={0}
             />
           </div>
           <div className="form-control mb-4 max-w-xs">
