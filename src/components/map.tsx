@@ -71,7 +71,7 @@ export default function Map({ drone }: MapProps) {
     <div className="block w-full ">
       <div
         ref={containerRef}
-        className="m-auto aspect-square w-full max-w-[720px] justify-self-center bg-slate-50 bg-[url('/background.svg')] bg-cover sm:w-[60vw]"
+        className="m-auto aspect-square w-full max-w-[720px] justify-self-center bg-slate-50 bg-[url('/map.svg')] bg-cover sm:w-[60vw]"
       >
         <motion.div
           className="shadow-2xl"
@@ -103,8 +103,8 @@ export default function Map({ drone }: MapProps) {
                 ease: "easeIn",
               }}
               style={{
-                borderRadius: "50%",
                 backgroundColor: "red",
+                borderRadius: "50%",
                 width: "100%",
                 height: "100%",
                 scale: displayAttack ? 1 : 0,
