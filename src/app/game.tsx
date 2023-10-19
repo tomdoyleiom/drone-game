@@ -7,7 +7,6 @@ import Map from "../components/map";
 
 export default function GameWrapper() {
   const [message, setMessage] = useState<string | undefined>();
-  useEffect(() => {});
   const game = useMemo(() => new Game(), []);
   const [drone, setDrone] = useState<GameDrone | undefined>();
 
