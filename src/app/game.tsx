@@ -1,12 +1,6 @@
 "use client";
-import {
-  FormEvent,
-  FormEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Game, { GameDrone } from "@/game";
 import { Direction, Facing } from "..";
 
@@ -54,13 +48,6 @@ export default function GameWrapper() {
       </>
     );
   }, [game.grid, drone]);
-
-  // const handlePlace = useCallback(() => {
-  //   const drone = game.place(0, 0, "NORTH");
-  //   if (drone) {
-  //     setDrone(() => ({ ...drone }));
-  //   }
-  // }, [game]);
 
   const handleRotate = useCallback(
     (direction: Direction) => () => {
