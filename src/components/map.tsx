@@ -71,7 +71,7 @@ export default function Map({ drone }: MapProps) {
     <div className="block w-full ">
       <div
         ref={containerRef}
-        className="m-auto aspect-square w-full max-w-[720px] justify-self-center bg-slate-50 bg-[url('/map.png')] bg-cover sm:w-[60vw]"
+        className="m-auto aspect-square w-full max-w-[720px] justify-self-center bg-slate-50 bg-[url('/map.svg')] bg-cover sm:w-[60vw]"
       >
         <motion.div
           className="shadow-2xl"
