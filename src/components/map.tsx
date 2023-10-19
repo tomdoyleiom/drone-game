@@ -10,7 +10,7 @@ type MapProps = {
   drone?: GameDrone;
 };
 
-const getRotate = (currentRotation: number, facing: Facing) => {
+const getRotate = (facing: Facing) => {
   switch (facing) {
     case "NORTH": {
       return 0;
@@ -41,7 +41,7 @@ export default function Map({ drone }: MapProps) {
     if (drone) {
       setX(drone.coordinate.x);
       setY(drone.coordinate.y);
-      setRotate((rotate) => getRotate(rotate, drone.facing));
+      setRotate((rotate) => getRotate(drone.facing));
       if (drone.attacking) {
         setDisplayAttack(true);
       } else {
