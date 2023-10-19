@@ -73,32 +73,32 @@ export default function GameWrapper() {
   return (
     <div className="block items-center lg:flex">
       <Map drone={drone} />
-      <div className="mx-auto mt-4 lg:mt-0 lg:pl-4">
+      <div className="mx-auto mt-4 block lg:mt-0 lg:pl-4">
         <button
           disabled={!drone}
           onClick={handleReport}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           report
         </button>
         <button
           disabled={!drone}
           onClick={handleMove}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           move
         </button>
         <button
           disabled={!drone}
           onClick={handleRotate("LEFT")}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           left
         </button>
         <button
           disabled={!drone}
           onClick={handleRotate("RIGHT")}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           right
         </button>
@@ -106,14 +106,14 @@ export default function GameWrapper() {
         <button
           disabled={!drone}
           onClick={handleAttack}
-          className="btn btn-primary"
+          className="btn btn-primary btn-sm"
         >
           attack
         </button>
 
         <form className="block" onSubmit={handleFormSubmit}>
-          <div className="inline-flex lg:block">
-            <div className="flex-item form-control max-w-xs">
+          <div className="block">
+            <div className="flex-item max-w-s form-control">
               <label className="label" htmlFor="x">
                 <span className=" label-text"> X coordinate</span>
               </label>
@@ -125,7 +125,7 @@ export default function GameWrapper() {
                 max={9}
               />
             </div>
-            <div className="flex-item form-control max-w-xs">
+            <div className="flex-item max-w-s form-control">
               <label className="label" htmlFor="y">
                 <span className=" label-text"> Y coordinate</span>
               </label>
@@ -137,7 +137,7 @@ export default function GameWrapper() {
                 max={9}
               />
             </div>
-            <div className="flex-item form-control mb-4 max-w-xs">
+            <div className="flex-item max-w-s form-control mb-4">
               <label className="label" htmlFor="facing">
                 <span className=" label-text">Facing</span>
               </label>
@@ -161,6 +161,10 @@ export default function GameWrapper() {
             place
           </button>
         </form>
+        <p className="text mt-4">
+          To place the drone on the map, set an X and Y co-ordinate, along with
+          a facing value and hit PLACE
+        </p>
       </div>
     </div>
   );
