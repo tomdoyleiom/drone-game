@@ -68,10 +68,10 @@ export default function Map({ drone }: MapProps) {
     }
   }, [displayDrone, x, y]);
   return (
-    <div className="block h-[80vh] w-full">
+    <div className="block w-full ">
       <div
         ref={containerRef}
-        className="aspect-square w-full justify-self-center bg-slate-50 bg-[url('/background.svg')] bg-cover"
+        className="m-auto aspect-square w-full max-w-[720px] justify-self-center bg-slate-50 bg-[url('/background.svg')] bg-cover sm:w-[60vw]"
       >
         <motion.div
           className="shadow-2xl"
