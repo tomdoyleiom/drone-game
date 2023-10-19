@@ -113,50 +113,51 @@ export default function GameWrapper() {
         >
           attack
         </button>
-
-        <form className="block" onSubmit={handleFormSubmit}>
-          <div className="block">
-            <div className="flex-item max-w-s form-control">
-              <label className="label" htmlFor="x">
-                <span className=" label-text"> X coordinate</span>
-              </label>
-              <input
-                className="input join-item input-bordered"
-                name="x"
-                type="number"
-                min={0}
-                max={9}
-              />
-            </div>
-            <div className="flex-item max-w-s form-control">
-              <label className="label" htmlFor="y">
-                <span className=" label-text"> Y coordinate</span>
-              </label>
-              <input
-                className="input join-item input-bordered"
-                name="y"
-                type="numer"
-                min={0}
-                max={9}
-              />
-            </div>
-            <div className="flex-item max-w-s form-control mb-4">
-              <label className="label" htmlFor="facing">
-                <span className=" label-text">Facing</span>
-              </label>
-              <select
-                className="select join-item select-bordered"
-                name="facing"
-                defaultValue={"NORTH"}
-              >
-                <option value="NORTH">North</option>
-                <option value="EAST">East</option>
-                <option value="SOUTH">South</option>
-                <option value="WEST">West</option>
-              </select>
-            </div>
+        <div className="mt-4">
+          {message && <p className="text-error">REPORTING: {message}</p>}
+        </div>
+        <form onSubmit={handleFormSubmit}>
+          <div className="form-control mt-4 max-w-xs">
+            <label className="label" htmlFor="x">
+              <span className=" label-text"> X coordinate</span>
+            </label>
+            <input
+              className="input join-item input-bordered"
+              name="x"
+              type="number"
+              min={0}
+              max={9}
+              required
+            />
           </div>
-
+          <div className="form-control max-w-xs">
+            <label className="label" htmlFor="y">
+              <span className=" label-text"> Y coordinate</span>
+            </label>
+            <input
+              className="input join-item input-bordered"
+              name="y"
+              type="numer"
+              min={0}
+              max={9}
+              required
+            />
+          </div>
+          <div className="form-control mb-4 max-w-xs">
+            <label className="label" htmlFor="facing">
+              <span className=" label-text">Facing</span>
+            </label>
+            <select
+              className="select join-item select-bordered"
+              name="facing"
+              defaultValue={"NORTH"}
+            >
+              <option value="NORTH">North</option>
+              <option value="EAST">East</option>
+              <option value="SOUTH">South</option>
+              <option value="WEST">West</option>
+            </select>
+          </div>
           <button
             type="submit"
             className=" flex-item btn btn-primary form-control"
