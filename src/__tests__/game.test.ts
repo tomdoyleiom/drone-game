@@ -25,6 +25,20 @@ test("Game has the report action", () => {
   game.report();
 });
 
+test("Reporting returns the current position and facing when drone on map", () => {
+  const game = new Game();
+  game.place(5, 5, "EAST");
+  const expected = `5, 5, EAST`;
+  const actual = game.report();
+  expect(actual).toEqual(expected);
+});
+
+test("Reporting returns nothing when the drone isn't on the map", () => {
+  const game = new Game();
+  const actual = game.report();
+  expect(actual).toBeUndefined();
+});
+
 test("Game has the attack action", () => {
   const game = new Game();
   game.attack();

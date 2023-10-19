@@ -69,6 +69,7 @@ export default class Game {
       const message = `${x}, ${y}, ${this.drone.facing}`;
 
       console.log(`[ACTION]: REPORT: ${message}`);
+      return message;
     } else {
       // if no drone
       console.log("no position, drone has not been added");

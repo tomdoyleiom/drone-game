@@ -5,49 +5,10 @@ import Game, { GameDrone } from "@/game";
 import { Direction, Facing } from "..";
 import Map from "../components/map";
 export default function GameWrapper() {
+  const [message, setMessage] = useState<string | undefined>();
+  useEffect(() => {});
   const game = useMemo(() => new Game(), []);
   const [drone, setDrone] = useState<GameDrone | undefined>();
-
-  const grid = useMemo(() => {
-    const droneLoc = drone?.coordinate;
-    return (
-      <div className="block">
-        {game.grid.map((row, rowIndex) => (
-          <div key={rowIndex} className="inline-block">
-            {row.map((col) => (
-              <div
-                className={`col-span-1 row-span-1 border p-4 ${
-                  droneLoc?.x === col.x && droneLoc?.y === col.y
-                    ? "bg-secondary"
-                    : ""
-                } ${
-                  drone?.attacking?.x === col.x && drone?.attacking.y === col.y
-                    ? "bg-primary"
-                    : ""
-                }`}
-                key={`${col.x}-${col.y}`}
-              >
-                x:{col.x} | y:{col.y}
-              </div>
-            ))}
-          </div>
-        ))}
-        {drone && (
-          <div>
-            <span>
-              drone at: {drone.coordinate.x}, {drone.coordinate.y}, facing:{" "}
-              {drone.facing}
-            </span>
-            {drone.attacking && (
-              <span>
-                drone attacking: {drone.attacking.x}, {drone.attacking.y}
-              </span>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  }, [game.grid, drone]);
 
   const handleRotate = useCallback(
     (direction: Direction) => () => {
@@ -74,7 +35,8 @@ export default function GameWrapper() {
   }, [game]);
 
   const handleReport = useCallback(() => {
-    game.report();
+    const message = game.report();
+    setMessage(message);
   }, [game]);
 
   const handleFormSubmit = useCallback(
@@ -112,7 +74,6 @@ export default function GameWrapper() {
 
   return (
     <div className="flex">
-      {/* <div className="mb-4">{grid}</div> */}
       <Map drone={drone} />
       <div className="mt-8 block pl-4">
         <button
@@ -151,7 +112,9 @@ export default function GameWrapper() {
         >
           attack
         </button>
-
+        <div className="mt-4">
+          {message && <p className="text-error">REPORTING: {message}</p>}
+        </div>
         <form onSubmit={handleFormSubmit}>
           <div className="form-control mt-4 max-w-xs">
             <label className="label" htmlFor="x">
@@ -163,6 +126,7 @@ export default function GameWrapper() {
               type="number"
               min={0}
               max={9}
+              required
             />
           </div>
           <div className="form-control max-w-xs">
@@ -175,6 +139,7 @@ export default function GameWrapper() {
               type="numer"
               min={0}
               max={9}
+              required
             />
           </div>
           <div className="form-control mb-4 max-w-xs">
