@@ -4,30 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import droneIcon from "../assets/drone.svg";
 import Image from "next/image";
 import { GameDrone } from "@/game";
-import { Facing } from "..";
 
 type MapProps = {
   drone?: GameDrone;
-};
-
-const getRotate = (facing: Facing) => {
-  switch (facing) {
-    case "NORTH": {
-      return 0;
-    }
-    case "EAST": {
-      return 90;
-    }
-    case "SOUTH": {
-      return 180;
-    }
-    case "WEST": {
-      return 270;
-    }
-    default: {
-      return 0;
-    }
-  }
 };
 
 export default function Map({ drone }: MapProps) {
@@ -41,7 +20,7 @@ export default function Map({ drone }: MapProps) {
     if (drone) {
       setX(drone.coordinate.x);
       setY(drone.coordinate.y);
-      setRotate((rotate) => getRotate(drone.facing));
+      setRotate(drone.rotation);
       if (drone.attacking) {
         setDisplayAttack(true);
       } else {

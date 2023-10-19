@@ -17,6 +17,7 @@ export type Coordinate = {
 export type GameDrone = {
   coordinate: Coordinate;
   facing: Facing;
+  rotation: number;
   attacking?: Coordinate;
 };
 
@@ -86,6 +87,7 @@ export default class Game {
         let newDirection =
           (index + modifier + directions.length) % directions.length;
         this.drone.facing = directions[newDirection];
+        this.drone.rotation += direction === "LEFT" ? -90 : 90;
         console.log(directions[newDirection]);
         console.log(`[ACTION]: ROTATE: ${direction}`);
       } else {
@@ -171,9 +173,23 @@ export default class Game {
     return { x: 0, y: 0 };
   }
 
+  private getInitialRotation(facing: Facing) {
+    switch (facing) {
+      case "NORTH":
+        return 0;
+      case "EAST":
+        return 90;
+      case "SOUTH":
+        return 180;
+      case "WEST":
+        return 270;
+    }
+  }
+
   place(x: number, y: number, facing: Facing) {
     this.drone = {
       coordinate: { x, y },
+      rotation: this.getInitialRotation(facing),
       facing,
     };
     console.log(`[ACTION]: PLACE (${x},${y},${facing})`);
