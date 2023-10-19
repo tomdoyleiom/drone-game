@@ -4,6 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Game, { GameDrone } from "@/game";
 import { Direction, Facing } from "..";
 import Map from "../components/map";
+
 export default function GameWrapper() {
   const [message, setMessage] = useState<string | undefined>();
   useEffect(() => {});
@@ -75,32 +76,32 @@ export default function GameWrapper() {
   return (
     <div className="flex">
       <Map drone={drone} />
-      <div className="mt-8 block pl-4">
+      <div className="mx-auto mt-4 block lg:mt-0 lg:pl-4">
         <button
           disabled={!drone}
           onClick={handleReport}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           report
         </button>
         <button
           disabled={!drone}
           onClick={handleMove}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           move
         </button>
         <button
           disabled={!drone}
           onClick={handleRotate("LEFT")}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           left
         </button>
         <button
           disabled={!drone}
           onClick={handleRotate("RIGHT")}
-          className="btn btn-primary"
+          className="btn btn-primary  btn-sm"
         >
           right
         </button>
@@ -108,7 +109,7 @@ export default function GameWrapper() {
         <button
           disabled={!drone}
           onClick={handleAttack}
-          className="btn btn-primary"
+          className="btn btn-primary btn-sm"
         >
           attack
         </button>
@@ -157,11 +158,17 @@ export default function GameWrapper() {
               <option value="WEST">West</option>
             </select>
           </div>
-
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className=" flex-item btn btn-primary form-control"
+          >
             place
           </button>
         </form>
+        <p className="text mt-4">
+          To place the drone on the map, set an X and Y co-ordinate, along with
+          a facing value and hit PLACE
+        </p>
       </div>
     </div>
   );

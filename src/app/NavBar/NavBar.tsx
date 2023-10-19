@@ -4,7 +4,7 @@ import Image from "next/image";
 export default async function NavBar() {
   return (
     <div className="bg-base-100">
-      <div className="navbar m-auto max-w-7xl flex-col gap-2 sm:flex-row">
+      <div className="navbar m-auto hidden max-w-7xl flex-col gap-2 lg:block lg:flex-row">
         <div className="flex-1">
           <Link href="/" className="btn btn-ghost text-xl normal-case">
             <Image
