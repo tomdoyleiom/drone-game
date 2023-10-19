@@ -56,6 +56,7 @@ test("Calling place adds a drone to the game", () => {
   game.place(0, 0, "NORTH");
   const expected: GameDrone = {
     coordinate: { x: 0, y: 0 },
+    rotation: 0,
     facing: "NORTH",
   };
   expect(game.drone).toStrictEqual(expected);
@@ -68,6 +69,7 @@ test("Calling rotate left with a drone facing NORTH updates the drone to face WE
   game.rotate("LEFT");
   const expected: GameDrone = {
     coordinate: { x: 0, y: 0 },
+    rotation: -90,
     facing: "WEST",
   };
   expect(game.drone).toStrictEqual(expected);
@@ -80,6 +82,7 @@ test("Calling rotate right with a drone facing NORTH updates the drone to face E
   game.rotate("RIGHT");
   const expected: GameDrone = {
     coordinate: { x: 0, y: 0 },
+    rotation: 90,
     facing: "EAST",
   };
   expect(game.drone).toStrictEqual(expected);
@@ -92,6 +95,7 @@ test("Calling move when drone is at 2,2 facing NORTH, should move drone to 2,3 f
   const newDrone = game.drone;
   const expected: GameDrone = {
     coordinate: { x: 2, y: 3 },
+    rotation: 0,
     facing: "NORTH",
   };
 
